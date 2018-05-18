@@ -9,37 +9,37 @@ var mongoDBURI = process.env.MONGODB_URI || 'mongodb://sega0907:0jamajodoremi@ds
  * @param response
  *
  */
-module.exports.getAllRoutes =  function (request, response) {
+module.exports.getAllOrders =  function (request, response) {
 
     mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
         if(err) throw err;
 
 
         //get handle to the databse
-        var theDatabase = client.db('dbName');
+        var theDatabase = client.db('heroku_jw552rkk');
 
 
         //get collection of routes
-        var Routes = theDatabase.collection('Routes');
+        var Orders = theDatabase.collection('ORDERS');
 
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
         //   this request and loop  is to display content in the  console log
-        var c = Routes.find({});
+        var c = Orders.find({});
 
         c.forEach(
             function(myDoc) {
-                console.log( "name: " + myDoc.name );  //just  loging the output to the console
+                console.log( "sega0907: " + myDoc.name );  //just  loging the output to the console
             }
         );
 
 
         //SECOND -show another way to make request for ALL Routes  and simply collect the  documents as an
         //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
-        Routes.find().toArray(function (err, docs) {
+        Orders.find().toArray(function (err, docs) {
             if(err) throw err;
 
-            response.render('getAllRoutes', {results: docs});
+            response.render('getAllOrders', {results: docs});
 
         });
 
