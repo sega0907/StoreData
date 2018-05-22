@@ -20,12 +20,12 @@ module.exports.getAllOrders =  function (request, response) {
 
 
         //get collection of routes
-        var Orders = theDatabase.collection('ORDERS');
+        var orders = theDatabase.collection('ORDERS');
 
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
         //   this request and loop  is to display content in the  console log
-        var c = Orders.find({});
+        var c = orders.find({});
 
         c.forEach(
             function(myDoc) {
