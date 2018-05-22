@@ -35,3 +35,6 @@ router.get('/mongodb', function (request, response) {
 
 });//end XXX.get
 router.get('/getAllRoutes', controllerMongoCollection.getAllRoutes);
+router.post('/storeData', function(req, res) {
+    res.render('order', { title: 'Order Details' });
+});
