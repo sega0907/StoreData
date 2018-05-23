@@ -67,7 +67,7 @@ module.exports.getAllOrders =  function (request, response) {
                     SHIPPING_CITY: shipcity, SHIPPING_STATE: shipstate,
                     SHIPPING_ZIP: shipzip
                 };
-            }
+
             dbo.collection("SHIPPING").insertOne(myobj2, function(err, res)
             { if (err) throw err; });
 
@@ -81,6 +81,10 @@ module.exports.getAllOrders =  function (request, response) {
             dbc.collection("ORDERS").insertOne(myObj3, function(err, res)
             { if (err) throw err; });
 
-            db.close();
-    };//end of connect
-};//end function
+    var dbk = db.db('heroku_jw552rkk');
+    dbk.collection("ORDERS").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log("THANK YOU FOR YOUR SUBMITTED ORDER");
+            db.close(); };//end of connect
+    };//end function
+};
