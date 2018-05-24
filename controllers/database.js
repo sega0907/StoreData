@@ -34,7 +34,7 @@ router.post('/storeData', function(req, res, next)
     var shipzip = req.body.shipzip; //for use in GET Query string of form URI/path?name=value
     var total = req.body.total; //for use in GET Query string of form URI/p
 });
-module.exports.storeData =  function (request, response) {
+module.exports.getAllOrders =  function (request, response) {
 
     MongoClient.connect(mongoDBURI, function(err, db) {
         if(err) throw err;
