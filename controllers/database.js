@@ -49,7 +49,7 @@ module.exports.getAllOrders =  function (request, response) {
 
         var customerdata = {
             _id: cid,
-            FIRSTNAME: "firstname",
+            FIRSTNAME: firstname,
             LASTNAME: lastname,
             STREET: street,
             CITY: city,
