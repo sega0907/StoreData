@@ -93,11 +93,11 @@ module.exports.storeData =  function (request, response) {
         ORDERS.insertOne(orderdata, function (err, result) {
             if (err) throw err;
         });
-        client.close(function (err) {
+        MongoClient.close(function (err) {
             if(err) throw err;
         });
     });
-    orders.find({}).toArray(function (err, docs) {
+    ORDERS.find({}).toArray(function (err, docs) {
         if(err) throw err;
 
         response.render('storeData', {results: docs});
