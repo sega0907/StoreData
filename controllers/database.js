@@ -1,4 +1,4 @@
-var mongodb = require('mongodb').mongodb;
+var MongoClient = require('mongodb').MongoClient;
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://sega0907:0jamajodoremi@ds051831.mlab.com:51831/heroku_jw552rkk';
 var express = require('storeData');
 var router = storeData.Router();
@@ -19,27 +19,26 @@ router.post('/storeData', function(req, res, next)
     var params = JSON.stringify(req.params);//if wanted parameters
     var firstname = req.body.billfirstname;
     var lastname = req.body.billlastname; //to work with separtors on any OS including Windows
-    var street = req.body.'"" + billaddress1 + billaddress2'; //for use in GET Query string of form URI/path?name=value
+    var street = req.body.billaddress1 + billaddress2; //for use in GET Query string of form URI/path?name=value
     var city = req.body.billcity;
     var bstate = req.body.billstate; //to work with separtors on any OS including Windows
     var zip = req.body.billzip; //for use in GET Query string of form URI/path?name=value
     var email = req.body.billemail;
     var cardtype = req.body.cardtype; //to work with separtors on any OS including Windows
     var cardnumber = req.body.cardnumber; //for use in GET Query string of form URI/path?name=value
-    var cardexp = req.body.'"" + cardexpmonth + "/" cardexpyear';
+    var cardexp = req.body.cardexpmonth + "/" + cardexpyear;
     var cardcvv = req.body.cardcvv; //to work with separtors on any OS including Windows
-    var shipstreet = req.body.'"" + shipaddress1 + shipaddress2)'; //for use in GET Query string of form URI/path?name=value
+    var shipstreet = req.body.shipaddress1 + shipaddress2; //for use in GET Query string of form URI/path?name=value
     var shipcity = req.body.shipcity;
     var shipstate = req.body.shipstate; //to work with separtors on any OS including Windows
     var shipzip = req.body.shipzip; //for use in GET Query string of form URI/path?name=value
-    var order = req.body.order;
+    var order = req.body.productdetails;
     var total = req.body.total; //for use in GET Query string of form URI/p
 });
 module.exports.getAllOrders =  function (request, response) {
 
-    mongodb.MongoClient.connect('mongodb://sega0907:0jamajodoremi@ds051831.mlab.com:51831/heroku_jw552rkk', function(err, db) {
+    MongoClient.connect('mongodb://sega0907:0jamajodoremi@ds051831.mlab.com:51831/heroku_jw552rkk', function(err, db) {
         if(err) throw err;
-        // var theDatabase = client.db('heroku_jw552rkk');
 
         var dbo = db.db('heroku_jw552rkk');
             var myobj =
