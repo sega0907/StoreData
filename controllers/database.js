@@ -48,7 +48,7 @@ module.exports.getAllOrders =  function (request, response) {
         var ndate = date.getDate();
 
         var customerdata = {
-            _id: cid,
+            //_id: cid,
             FIRSTNAME: firstname,
             LASTNAME: lastname,
             STREET: street,
@@ -97,10 +97,11 @@ module.exports.getAllOrders =  function (request, response) {
             if(err) throw err;
         });
     });
-    ORDERS.find({}).toArray(function (err, docs) {
+    db.collection("ORDERS").find({}).toArray(function (err, docs) {
         if(err) throw err;
 
         response.render('storeData', {results: docs});
+        db.close();
 
     });
 };
