@@ -2,22 +2,9 @@
 <html>
 <head>
     <title>THANK YOU FOR YOUR SUBMITTED ORDER</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
 </head>
 <body>
-<div class="container">
-    <h2>getting orders</h2>
-    <ul>
-        <% results.forEach(function(r) { %>
-        <li><%= r.name %> - <%= r.frequency %></li>
-        <ul>
-            <li>From:( <%=r.CUSTOMER_ID %>)</li>
-            <li>TO: ( <%=r.ORDER_TOTAL %>) </li>
-        </ul>
-        <br/><br/>
-        <% }); %>
-    </ul>
-</div>
 
 </body>
 </html>
