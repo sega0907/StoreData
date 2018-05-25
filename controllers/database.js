@@ -34,7 +34,7 @@ router.post('/storeData', function(req, res, next)
     var shipzip = req.body.shipzip; //for use in GET Query string of form URI/path?name=value
     var total = req.body.total; //for use in GET Query string of form URI/p
 });
-module.exports.getAllOrders =  function (request, response) {
+/*module.exports.getAllOrders =  function (request, response) {
 
     MongoClient.connect(mongoDBURI, function(err, db) {
         if(err) throw err;
@@ -103,5 +103,79 @@ module.exports.getAllOrders =  function (request, response) {
         response.render('storeData', {results: docs});
         db.close();
 
+    });
+};*/
+module.exports.storeData = function (request, response) {
+
+    const { parse } = require('querystring');
+    if (request.method === 'POST') {
+        var finalOrder = request.body.order;
+        response.send(finalOrder);
+    }
+
+    var print = JSON.parse(finalOrder);
+    console.log(print);
+
+    mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
+        if(err) throw err;
+
+        //get handle to the databse
+        var theDatabase = client.db('heroku_w1zxv8n0');
+
+        //get collection of Orders
+        var Customers = theDatabase.collection('CUSTOMERS');
+        var Billing = theDatabase.collection('BILLING');
+        var Shipping = theDatabase.collection('SHIPPING');
+        var Orders = theDatabase.collection('ORDERS');
+
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+
+        var customerdata = {
+            CID: customerID,
+            FIRSTNAME: JSON.parse(finalOrder).firstname,
+            LASTNAME: JSON.parse(finalOrder).lastname,
+            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
+            CITY: JSON.parse(finalOrder).city,
+            STATE: JSON.parse(finalOrder).state,
+            EMAIL: JSON.parse(finalOrder).email
+        };
+
+        var shippingdata = {
+            SID: shippingID,
+            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
+            CITY: JSON.parse(finalOrder).city,
+            STATE: JSON.parse(finalOrder).state
+        };
+
+        var billingdata = {
+            BID: billingID,
+            CREDITCARDTYPE: JSON.parse(finalOrder).cardtype,
+            CREDITCARDNUM: JSON.parse(finalOrder).cardnumber,
+            CREDITCARDEXP: JSON.parse(finalOrder).cardexpmonth,
+            CREDITCARDYR: JSON.parse(finalOrder).cardexpyear,
+            CREDITCARDSECURITYNUM: JSON.parse(finalOrder).cardcvv
+        };
+
+        var orders = {
+            PRODUCT_VECTOR: JSON.parse(finalOrder)['productdetails']
+        };
+
+        Customers.insertOne(customerdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Billing.insertOne(billingdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Shipping.insertOne(shippingdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Orders.insertOne(orders, function (err, result) {
+            if (err) throw err;
+        });
     });
 };
