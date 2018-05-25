@@ -34,7 +34,7 @@ router.post('/storeData', function(req, res, next)
     var shipzip = req.body.shipzip; //for use in GET Query string of form URI/path?name=value
     var total = req.body.total; //for use in GET Query string of form URI/p
 });
-/*module.exports.getAllOrders =  function (request, response) {
+module.exports.getAllOrders =  function (request, response) {
 
     MongoClient.connect(mongoDBURI, function(err, db) {
         if(err) throw err;
@@ -48,7 +48,7 @@ router.post('/storeData', function(req, res, next)
         var ndate = date.getDate();
 
         var customerdata = {
-            //_id: cid,
+            CID: cid,
             FIRSTNAME: firstname,
             LASTNAME: lastname,
             STREET: street,
@@ -61,7 +61,7 @@ router.post('/storeData', function(req, res, next)
             if (err) throw err;
         });
         var billingdata = {
-            _id: bid,
+            BID: bid,
             CUSTOMER_ID: cid,
             CREDITCARDTYPE: cardtype,
             CREDITCARDNUM: cardnumber,
@@ -72,7 +72,7 @@ router.post('/storeData', function(req, res, next)
             if (err) throw err;
         });
         var shippingdata = {
-            _id: sid,
+            SID: sid,
             CUSTOMER_ID: cid,
             SHIPPING_STREET: shipstreet,
             SHIPPING_CITY: shipcity,
@@ -83,10 +83,10 @@ router.post('/storeData', function(req, res, next)
             if (err) throw err;
         });
         var orderdata = {
-            _id: oid,
-            CUSTOMER_ID: cid,
-            BILLING_ID: bid,
-            SHIPPING_ID: sid,
+            OID: oid,
+            CID: cid,
+            BID: bid,
+            SID: sid,
             DATE: ndate,
             ORDER_TOTAL: total
         };
@@ -104,8 +104,8 @@ router.post('/storeData', function(req, res, next)
         db.close();
 
     });
-};*/
-module.exports.storeData = function (request, response) {
+};
+/*module.exports.storeData = function (request, response) {
 
     const { parse } = require('querystring');
     if (request.method === 'POST') {
@@ -178,4 +178,4 @@ module.exports.storeData = function (request, response) {
             if (err) throw err;
         });
     });
-};
+};*/
