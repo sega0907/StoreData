@@ -120,7 +120,7 @@ module.exports.storeData = function (request, response) {
         if(err) throw err;
 
         //get handle to the databse
-        var theDatabase = client.db('heroku_w1zxv8n0');
+        var theDatabase = client.db('heroku_jw552rkk');
 
         //get collection of Orders
         var Customers = theDatabase.collection('CUSTOMERS');
