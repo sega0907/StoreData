@@ -162,19 +162,19 @@ module.exports.storeData = function (request, response) {
             PRODUCT_VECTOR: JSON.parse(finalOrder)['productdetails']
         };
 
-        CUSTOMERS.insertOne(customerdata, function (err, result) {
+        Customers.insertOne(customerdata, function (err, result) {
             if (err) throw err;
         });
 
-        BILLING.insertOne(billingdata, function (err, result) {
+        Billing.insertOne(billingdata, function (err, result) {
             if (err) throw err;
         });
 
-        SHIPPING.insertOne(shippingdata, function (err, result) {
+        Shipping.insertOne(shippingdata, function (err, result) {
             if (err) throw err;
         });
 
-        ORDERS.insertOne(orders, function (err, result) {
+        Orders.insertOne(orders, function (err, result) {
             if (err) throw err;
         });
     });
